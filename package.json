@@ -1,0 +1,19 @@
+{
+  "name": "memory_magic",
+  "version": "1.0.0",
+  "description": "A simple memory card game based off of the project from Udacity",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbimagine/memory_magic.git"
+  },
+  "author": "Joe Bates",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbimagine/memory_magic/issues"
+  },
+  "homepage": "https://github.com/jbimagine/memory_magic#readme"
+}
