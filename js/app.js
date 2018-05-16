@@ -1,7 +1,11 @@
 /*
  * Create a list that holds all of your cards
  */
+let cardsArray;
 
+cardsArray = [ 'fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-leaf', 'fa-bicycle' ];
+
+console.log(cardsArray);
 
 /*
  * Display the cards on the page
@@ -12,19 +16,30 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+	var currentIndex = array.length,
+		temporaryValue,
+		randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+	while (currentIndex !== 0) {
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}
+	console.log(array);
+	return array;
 }
 
+//shuffle the cards when the reset button is clicked
+let shuffleCards = (restartGame) => {
+	restartGame = document.getElementById('restart-game');
+	restartGame.addEventListener('click', () => {
+		shuffle(cardsArray);
+	});
+};
+
+shuffleCards();
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -36,3 +51,19 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+let getCard = (card) => {
+	card = document.getElementsByClassName('card');
+
+	for (let i = 0; i < card.length; i++) {
+		card[i].addEventListener('click', () => {
+			card[i].classList.add('show', 'open');
+		});
+	}
+};
+
+getCard();
+
+let flipCard = (card) => {
+	card = document.getElementsByClassName('card');
+};
