@@ -3,7 +3,24 @@
  */
 let cardsArray;
 
-cardsArray = [ 'fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-leaf', 'fa-bicycle' ];
+cardsArray = [
+	'fa-diamond',
+	'fa-diamond',
+	'fa-paper-plane-o',
+	'fa-paper-plane-o',
+	'fa-anchor',
+	'fa-anchor',
+	'fa-bolt',
+	'fa-bolt',
+	'fa-cube',
+	'fa-cube',
+	'fa-leaf',
+	'fa-leaf',
+	'fa-bomb',
+	'fa-bomb',
+	'fa-bicycle',
+	'fa-bicycle'
+];
 
 console.log(cardsArray);
 
@@ -62,8 +79,21 @@ let getCard = (card) => {
 	}
 };
 
-getCard();
-
-let flipCard = (card) => {
+const flipCard = (card, theClasses) => {
 	card = document.getElementsByClassName('card');
+	theClasses = document.querySelectorAll('.deck .card');
+
+	for (let i = 0; i < card.length; i++) {
+		card[i].addEventListener('click', () => {
+			if (!theClasses[i].classList.contains('show')) {
+				card[i].style.transform = 'rotateY(180deg)';
+				card[i].classList.add('show', 'open');
+			} else {
+				card[i].style.transform = 'rotateY(0deg)';
+				card[i].classList.remove('show', 'open');
+			}
+		});
+	}
 };
+
+flipCard();
