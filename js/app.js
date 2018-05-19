@@ -4,25 +4,25 @@
 let cardsArray;
 
 cardsArray = [
-	'fa-diamond',
-	'fa-diamond',
-	'fa-paper-plane-o',
-	'fa-paper-plane-o',
-	'fa-anchor',
-	'fa-anchor',
-	'fa-bolt',
-	'fa-bolt',
-	'fa-cube',
-	'fa-cube',
-	'fa-leaf',
-	'fa-leaf',
-	'fa-bomb',
-	'fa-bomb',
-	'fa-bicycle',
-	'fa-bicycle'
+	'fa fa-diamond',
+	'fa fa-diamond',
+	'fa fa-paper-plane-o',
+	'fa fa-paper-plane-o',
+	'fa fa-anchor',
+	'fa fa-anchor',
+	'fa fa-bolt',
+	'fa fa-bolt',
+	'fa fa-cube',
+	'fa fa-cube',
+	'fa fa-leaf',
+	'fa fa-leaf',
+	'fa fa-bomb',
+	'fa fa-bomb',
+	'fa fa-bicycle',
+	'fa fa-bicycle'
 ];
 
-console.log(cardsArray);
+//console.log(cardsArray);
 
 /*
  * Display the cards on the page
@@ -44,19 +44,10 @@ function shuffle(array) {
 		array[currentIndex] = array[randomIndex];
 		array[randomIndex] = temporaryValue;
 	}
-	console.log(array);
 	return array;
 }
 
 //shuffle the cards when the reset button is clicked
-let shuffleCards = (restartGame) => {
-	restartGame = document.getElementById('restart-game');
-	restartGame.addEventListener('click', () => {
-		shuffle(cardsArray);
-	});
-};
-
-shuffleCards();
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -69,17 +60,8 @@ shuffleCards();
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let getCard = (card) => {
-	card = document.getElementsByClassName('card');
-
-	for (let i = 0; i < card.length; i++) {
-		card[i].addEventListener('click', () => {
-			card[i].classList.add('show', 'open');
-		});
-	}
-};
-
-const flipCard = (card, theClasses) => {
+//Function that controls the flipping of the cards.  Else statement is there only for testing purposes
+function flipCard(card, theClasses) {
 	card = document.getElementsByClassName('card');
 	theClasses = document.querySelectorAll('.deck .card');
 
@@ -94,6 +76,38 @@ const flipCard = (card, theClasses) => {
 			}
 		});
 	}
-};
+}
 
-flipCard();
+cardsArray = shuffle(cardsArray);
+
+//Dynamically creates the html cards
+function deckOfCards(card, cardDeck) {
+	let cardStr;
+	let iconPic;
+	for (let i = 0; i < cardsArray.length; i++) {
+		cardDeck = document.querySelector('.deck');
+		card = document.createElement('li');
+		//card.setAttribute('class', 'card');
+		cardStr = 'card';
+		card.classList.add(cardStr);
+		cardDeck.appendChild(card);
+		iconPic = document.createElement('i');
+		iconPic.setAttribute('class', cardsArray[i]);
+		card.appendChild(iconPic);
+	}
+	//add in the flipcard function
+	flipCard();
+}
+deckOfCards();
+
+//restart the game
+function restartGame(restart) {
+	restart = document.getElementById('restart');
+	restart.addEventListener('click', function() {
+		let cards = document.getElementById('card-deck');
+		cards.innerHTML = ' ';
+		shuffle(cardsArray);
+		deckOfCards();
+	});
+}
+restartGame();
