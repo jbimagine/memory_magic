@@ -1,26 +1,20 @@
 /*
  * Create a list that holds all of your cards
  */
-let cardsArray;
+let cardsArray0, cardsArray1;
 
-cardsArray = [
-	'fa fa-diamond',
+cardsArray0 = [
 	'fa fa-diamond',
 	'fa fa-paper-plane-o',
-	'fa fa-paper-plane-o',
-	'fa fa-anchor',
 	'fa fa-anchor',
 	'fa fa-bolt',
-	'fa fa-bolt',
-	'fa fa-cube',
 	'fa fa-cube',
 	'fa fa-leaf',
-	'fa fa-leaf',
 	'fa fa-bomb',
-	'fa fa-bomb',
-	'fa fa-bicycle',
 	'fa fa-bicycle'
 ];
+
+cardsArray1 = cardsArray0.concat(cardsArray0);
 
 //console.log(cardsArray);
 
@@ -47,7 +41,7 @@ function shuffle(array) {
 	return array;
 }
 
-//shuffle the cards when the reset button is clicked
+cardsArray1 = shuffle(cardsArray1);
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -70,21 +64,20 @@ function flipCard(card, theClasses) {
 			if (!theClasses[i].classList.contains('show')) {
 				card[i].style.transform = 'rotateY(180deg)';
 				card[i].classList.add('show', 'open');
-			} else {
-				card[i].style.transform = 'rotateY(0deg)';
-				card[i].classList.remove('show', 'open');
-			}
+				console.log(cardsArray1[i]);
+			} //else {
+			//card[i].style.transform = 'rotateY(0deg)';
+			//card[i].classList.remove('show', 'open');
+			//}
 		});
 	}
 }
-
-cardsArray = shuffle(cardsArray);
 
 //Dynamically creates the html cards
 function deckOfCards(card, cardDeck) {
 	let cardStr;
 	let iconPic;
-	for (let i = 0; i < cardsArray.length; i++) {
+	for (let i = 0; i < cardsArray1.length; i++) {
 		cardDeck = document.querySelector('.deck');
 		card = document.createElement('li');
 		//card.setAttribute('class', 'card');
@@ -92,7 +85,7 @@ function deckOfCards(card, cardDeck) {
 		card.classList.add(cardStr);
 		cardDeck.appendChild(card);
 		iconPic = document.createElement('i');
-		iconPic.setAttribute('class', cardsArray[i]);
+		iconPic.setAttribute('class', cardsArray1[i]);
 		card.appendChild(iconPic);
 	}
 	//add in the flipcard function
@@ -100,13 +93,15 @@ function deckOfCards(card, cardDeck) {
 }
 deckOfCards();
 
+function openedCards(cards) {}
+
 //restart the game
 function restartGame(restart) {
 	restart = document.getElementById('restart');
 	restart.addEventListener('click', function() {
 		let cards = document.getElementById('card-deck');
 		cards.innerHTML = ' ';
-		shuffle(cardsArray);
+		shuffle(cardsArray1);
 		deckOfCards();
 	});
 }
