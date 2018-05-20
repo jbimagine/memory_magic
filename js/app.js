@@ -1,17 +1,19 @@
 /*
  * Create a list that holds all of your cards
  */
-let cardsArray0, cardsArray1;
+let cardsArray0, cardsArray1, fa;
+
+fa = 'fa ';
 
 cardsArray0 = [
-	'fa fa-diamond',
-	'fa fa-paper-plane-o',
-	'fa fa-anchor',
-	'fa fa-bolt',
-	'fa fa-cube',
-	'fa fa-leaf',
-	'fa fa-bomb',
-	'fa fa-bicycle'
+	'fa-diamond',
+	'fa-paper-plane-o',
+	'fa-anchor',
+	'fa-bolt',
+	'fa-cube',
+	'fa-leaf',
+	'fa-bomb',
+	'fa-bicycle'
 ];
 
 cardsArray1 = cardsArray0.concat(cardsArray0);
@@ -77,17 +79,14 @@ function flipCard(card, theClasses) {
 function deckOfCards(card, cardDeck) {
 	let cardStr;
 	let iconPic;
-	for (let i = 0; i < cardsArray1.length; i++) {
-		cardDeck = document.querySelector('.deck');
-		card = document.createElement('li');
-		//card.setAttribute('class', 'card');
-		cardStr = 'card';
-		card.classList.add(cardStr);
-		cardDeck.appendChild(card);
-		iconPic = document.createElement('i');
-		iconPic.setAttribute('class', cardsArray1[i]);
-		card.appendChild(iconPic);
+	cardDeck = document.querySelector('.deck');
+	let cards = '';
+
+	for (let card of cardsArray1) {
+		cards += `<li class='card'><i class ='${fa + card}'></i></li>`;
 	}
+	console.log(cards);
+	cardDeck.innerHTML = cards;
 	//add in the flipcard function
 	flipCard();
 }
