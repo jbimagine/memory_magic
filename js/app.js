@@ -1,13 +1,18 @@
 /*
  * Create a list that holds all of your cards
  */
-let cardsArray0, cardsArray1, fa, card, cardDeck;
+let cardsArray0, cardsArray1, fa, card, cardDeck, theCards, matchedCards, flippedCards;
+
+let cardFlip180 = 'rotateY(180deg)';
+let cardFlip0 = 'rotateY(0deg)';
+
+fa = 'fa ';
 
 card = document.getElementsByClassName('card');
 deck = document.querySelector('.deck');
 cardDeck = document.getElementById('card-deck');
-
-fa = 'fa ';
+matchedCards = [];
+flippedCards = [];
 
 cardsArray0 = [
 	'fa-diamond',
@@ -60,42 +65,8 @@ cardsArray1 = shuffle(cardsArray1);
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-//Function that controls the flipping of the cards.  Else statement is there only for testing purposes
-
-function displayCard() {
-	this.classList.toggle('open');
-	this.classList.toggle('show');
-}
-
-function flipsCard() {
-	let selectedCard = '';
-	let matchedCards = [];
-	let flippedCards = [];
-
-	cardDeck.addEventListener('click', function(evt) {
-		cardTarget = evt.target;
-		if (cardTarget && cardTarget.nodeName === 'LI' && flippedCards.length < 2) {
-			cardTarget.classList.add('open', 'show');
-			cardTarget.style.transform = 'rotateY(180deg)';
-			selectedCard = cardTarget.children[0].classList[1];
-			flippedCards.push(selectedCard);
-			console.log(flippedCards);
-		}
-		if (flippedCards[0] === flippedCards[1]) {
-			matchedCards.push(flippedCards[0], flippedCards[1]);
-			macthed();
-		} else {
-			unmatched();
-		}
-	});
-}
-
-function matched() {}
-
-function unmatched() {}
-
 //Dynamically creates the html cards
-function deckOfCards(card) {
+function createCards(card) {
 	let cardStr;
 	let iconPic;
 	let cards = '';
@@ -104,9 +75,54 @@ function deckOfCards(card) {
 	}
 	deck.innerHTML = cards;
 	//add in the flipcard function
-	flipsCard();
+	//flipsCard();
 }
-deckOfCards();
+createCards();
+
+function displayCard() {
+	for (let i = 0; i < cardsArray1.length; i++) {
+		card[i].addEventListener('click', function() {
+			flippedCards.push(cardsArray1[i]);
+			if (flippedCards.length <= 2) {
+				card[i].classList.add('show', 'open');
+				card[i].style.transform = cardFlip180;
+			}
+			if (flippedCards.length == 2) {
+				if (flippedCards[1] !== flippedCards[0]) {
+					unmatched();
+				} else {
+					matched();
+				}
+			}
+		});
+	}
+}
+displayCard();
+
+function matched() {
+	console.log('you got a match');
+	matchedCards.push(flippedCards[0], flippedCards[1]);
+	for (let m = 0; m < cardsArray1.length; m++) {
+		if (card[m].classList.contains('show')) {
+			card[m].classList.add('match');
+		}
+	}
+	flippedCards = [];
+}
+
+function unmatched() {
+	console.log(flippedCards);
+	console.log('it is not a match');
+	setTimeout(function() {
+		for (let j = 0; j < cardsArray1.length; j++) {
+			if (!card[j].classList.contains('match')) {
+				card[j].classList.remove('show', 'open');
+				card[j].style.transform = cardFlip0;
+			}
+		}
+		flippedCards = [];
+	}, 1500);
+}
 
 //restart the game
 function restartGame(restart) {
@@ -115,7 +131,8 @@ function restartGame(restart) {
 		let cards = document.getElementById('card-deck');
 		cards.innerHTML = ' ';
 		shuffle(cardsArray1);
-		deckOfCards();
+		createCards();
+		displayCard();
 	});
 }
 restartGame();
