@@ -1,5 +1,5 @@
 //All of the global variables
-let cardsArray0, cardsArray1, fa, card, cardDeck, theCards, matchedCards, flippedCards;
+let cardsArray0, cardsArray1, fa, card, cardDeck, theCards, matchedCards, flippedCards, stars;
 
 let cardFlip180 = 'rotateY(180deg)';
 let cardFlip0 = 'rotateY(0deg)';
@@ -9,6 +9,7 @@ fa = 'fa ';
 card = document.getElementsByClassName('card');
 deck = document.querySelector('.deck');
 cardDeck = document.getElementById('card-deck');
+stars = document.querySelector('stars');
 matchedCards = [];
 flippedCards = [];
 
@@ -50,7 +51,16 @@ cardsArray1 = shuffle(cardsArray1);
 /********************************************************************************************** */
 
 //Move counter
-function moveCounter(stars) {}
+function movesCounter(moves) {
+	moves = 0;
+	moves++;
+}
+movesCounter();
+
+/********************************************************************************************** */
+
+//Timer function
+function setTimer() {}
 
 /********************************************************************************************** */
 
@@ -70,7 +80,7 @@ createCards();
 
 /********************************************************************************************** */
 
-//displays the show and open html.  Container for the match and unmatch functions
+//Displays the show and open html.  Also a container for the match and unmatch functions
 function displayCard() {
 	for (let i = 0; i < cardsArray1.length; i++) {
 		card[i].addEventListener('click', function() {
