@@ -60,7 +60,20 @@ movesCounter();
 /********************************************************************************************** */
 
 //Timer function
-function setTimer() {}
+function setTimer() {
+	let timer = setInterval(countTimer, 1000);
+
+	let totalSeconds = 0;
+
+	function countTimer() {
+		++totalSeconds;
+		let hour = Math.floor(totalSeconds / 3600);
+		let minute = Math.floor((totalSeconds - hour * 3600) / 60);
+		let seconds = totalSeconds - (hour * 3600 + minute * 60);
+
+		document.getElementById('timer').innerHTML = hour + ':' + minute + ':' + seconds;
+	}
+}
 
 /********************************************************************************************** */
 
@@ -82,8 +95,14 @@ createCards();
 
 //Displays the show and open html.  Also a container for the match and unmatch functions
 function displayCard() {
+	let start = true;
+
 	for (let i = 0; i < cardsArray1.length; i++) {
 		card[i].addEventListener('click', function() {
+			if (start) {
+				setTimer();
+			}
+			start = false;
 			flippedCards.push(cardsArray1[i]);
 			if (flippedCards.length <= 2) {
 				card[i].classList.add('show', 'open');
