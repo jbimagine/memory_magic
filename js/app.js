@@ -103,16 +103,19 @@ function displayCard() {
 				setTimer();
 			}
 			start = false;
-			flippedCards.push(cardsArray1[i]);
-			if (flippedCards.length <= 2) {
-				card[i].classList.add('show', 'open');
-				card[i].style.transform = cardFlip180;
-			}
-			if (flippedCards.length == 2) {
-				if (flippedCards[1] !== flippedCards[0]) {
-					unmatched();
-				} else {
-					matched();
+			if (!card[i].classList.contains('show', 'open')) {
+				flippedCards.push(cardsArray1[i]);
+				if (flippedCards.length <= 2) {
+					card[i].classList.add('show', 'open');
+					card[i].style.transform = cardFlip180;
+				}
+
+				if (flippedCards.length == 2) {
+					if (flippedCards[1] !== flippedCards[0]) {
+						unmatched();
+					} else {
+						matched();
+					}
 				}
 			}
 		});
@@ -127,12 +130,14 @@ function matched() {
 	console.log('you got a match');
 	matchedCards.push(flippedCards[0], flippedCards[1]);
 	for (let m = 0; m < cardsArray1.length; m++) {
-		if (card[m].classList.contains('show')) {
+		if (card[m].classList.contains('show', 'open')) {
 			card[m].classList.add('match');
 		}
 	}
 	flippedCards = [];
 }
+
+function disable() {}
 
 /********************************************************************************************** */
 
