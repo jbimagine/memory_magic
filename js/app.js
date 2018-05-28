@@ -1,15 +1,35 @@
 //All of the global variables
-let cardsArray0, cardsArray1, fa, card, cardDeck, theCards, matchedCards, flippedCards, stars;
+let cardsArray0,
+	cardsArray1,
+	fa,
+	card,
+	cardDeck,
+	theCards,
+	matchedCards,
+	flippedCards,
+	stars,
+	timerElem,
+	timer,
+	modalWinContainer,
+	movesClass,
+	count,
+	modalRestartBtn,
+	cardFlip180,
+	cardFlip0;
 
-let cardFlip180 = 'rotateY(180deg)';
-let cardFlip0 = 'rotateY(0deg)';
-
+cardFlip180 = 'rotateY(180deg)';
+cardFlip0 = 'rotateY(0deg)';
 fa = 'fa ';
-
 card = document.getElementsByClassName('card');
 deck = document.querySelector('.deck');
 cardDeck = document.getElementById('card-deck');
 stars = document.querySelector('stars');
+timerElem = document.getElementById('timer');
+modalWinContainer = document.getElementById('modal-win-container');
+timerWin = document.getElementById('timerWin');
+movesClass = document.getElementsByClassName('moves');
+modalRestartBtn = document.getElementById('modal-restart-btn');
+count = 0;
 matchedCards = [];
 flippedCards = [];
 
@@ -51,17 +71,18 @@ cardsArray1 = shuffle(cardsArray1);
 /********************************************************************************************** */
 
 //Move counter
-function movesCounter(moves) {
-	moves = 0;
-	moves++;
+function movesCounter() {
+	count++;
+	for (let i = 0; i < movesClass.length; i++) {
+		movesClass[i].innerHTML = count;
+	}
 }
-movesCounter();
 
 /********************************************************************************************** */
 
 //Timer function
 function setTimer() {
-	let timer = setInterval(countTimer, 1000);
+	timer = setInterval(countTimer, 1000);
 
 	let totalSeconds = 0;
 
@@ -71,7 +92,7 @@ function setTimer() {
 		let minute = Math.floor((totalSeconds - hour * 3600) / 60);
 		let seconds = totalSeconds - (hour * 3600 + minute * 60);
 
-		document.getElementById('timer').innerHTML = hour + ':' + minute + ':' + seconds;
+		timerElem.innerHTML = hour + ':' + minute + ':' + seconds;
 	}
 }
 
@@ -86,8 +107,6 @@ function createCards(card) {
 		cards += `<li class='card'><i class ='${fa + card}'></i></li>`;
 	}
 	deck.innerHTML = cards;
-	//add in the flipcard function
-	//flipsCard();
 }
 createCards();
 
@@ -111,6 +130,7 @@ function displayCard() {
 				}
 
 				if (flippedCards.length == 2) {
+					movesCounter();
 					if (flippedCards[1] !== flippedCards[0]) {
 						unmatched();
 					} else {
@@ -129,10 +149,17 @@ displayCard();
 function matched() {
 	console.log('you got a match');
 	matchedCards.push(flippedCards[0], flippedCards[1]);
+	console.log(matchedCards);
 	for (let m = 0; m < cardsArray1.length; m++) {
 		if (card[m].classList.contains('show', 'open')) {
 			card[m].classList.add('match');
 		}
+	}
+	if (matchedCards.length === 16) {
+		modalWinContainer.style.display = 'flex';
+		timerWin.innerHTML = timerElem.innerHTML;
+		console.log('You won the game!!');
+		clearInterval(timer);
 	}
 	flippedCards = [];
 }
@@ -153,7 +180,7 @@ function unmatched() {
 			}
 		}
 		flippedCards = [];
-	}, 1500);
+	}, 1000);
 }
 
 /********************************************************************************************** */
@@ -162,11 +189,33 @@ function unmatched() {
 function restartGame(restart) {
 	restart = document.getElementById('restart');
 	restart.addEventListener('click', function() {
-		let cards = document.getElementById('card-deck');
-		cards.innerHTML = ' ';
-		shuffle(cardsArray1);
-		createCards();
-		displayCard();
+		restartModal();
 	});
 }
 restartGame();
+
+function restartModal() {
+	cardDeck.innerHTML = ' ';
+
+	//reset the moves
+	count = 0;
+	for (let i = 0; i < movesClass.length; i++) {
+		movesClass[i].innerHTML = '';
+	}
+
+	//reset timer
+	timerElem.innerHTML = '';
+	clearInterval(timer);
+
+	shuffle(cardsArray1);
+	createCards();
+	displayCard();
+}
+
+function restartWin() {
+	modalRestartBtn.addEventListener('click', function() {
+		modalWinContainer.style.display = 'none';
+		restartModal();
+	});
+}
+restartWin();
