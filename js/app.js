@@ -155,6 +155,7 @@ function matched() {
 			card[m].classList.add('match');
 		}
 	}
+	//displays the win modal if all the cards are shown
 	if (matchedCards.length === 16) {
 		modalWinContainer.style.display = 'flex';
 		timerWin.innerHTML = timerElem.innerHTML;
@@ -163,8 +164,6 @@ function matched() {
 	}
 	flippedCards = [];
 }
-
-function disable() {}
 
 /********************************************************************************************** */
 
