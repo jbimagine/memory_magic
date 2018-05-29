@@ -192,7 +192,7 @@ function matched() {
 	}
 	//displays the win modal if all the cards are shown
 	if (matchedCards.length === 16) {
-		modalWinContainer.style.display = 'flex';
+		modalWinContainer.style.display = 'inline-block';
 		timerWin.innerHTML = timerElem.innerHTML;
 		//console.log('You won the game!!');
 		clearInterval(timer);
