@@ -108,12 +108,17 @@ h1 {
 	display: inline-block;
 }
 
+.stars {
+	list-style: none;
+}
+
 .score-panel #restart {
 	float: right;
 	cursor: pointer;
 }
 
 #modal-win-container {
+	color: white;
 	display: none;
 	margin-top: 50px;
 	position: absolute;
@@ -124,12 +129,16 @@ h1 {
 	height: 100%;
 }
 
+/*
+   * Styles for the win modal
+   */
+
 #modal-win-wrapper {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
 	margin: auto;
-	width: 60%;
+	width: 40%;
 	box-shadow: 5px 5px 40px black;
 	height: 400px;
 	background: #5da2c4;
@@ -140,21 +149,98 @@ h1 {
 #modal-win-secondary-container {
 	display: flex;
 	height: 80%;
-	justify-content: space-around;
+	flex-direction: column;
 	align-items: center;
-	margin-left: 20px;
 }
 
-#modal-win-title,
-#modal-win-secondary-title {
-	color: white;
+#modal-win-title {
 	font-size: 36px;
+}
+
+#modal-win-secondary-title {
+	font-size: 30px;
 }
 
 #modal-restart-btn button {
 	font-size: 20px;
+	color: white;
+	background: grey;
 	border: none;
 	padding: 5px;
+	margin-top: 10px;
 	border-radius: 10px;
 	cursor: pointer;
+}
+
+#stars-win {
+	display: flex;
+	padding-right: 40px;
+}
+
+/*
+   * Styles for responsive design
+   */
+
+@media screen and (max-width: 880px) {
+	#modal-win-title {
+		font-size: 24px;
+	}
+
+	#modal-win-secondary-title {
+		font-size: 20px;
+	}
+}
+
+@media screen and (max-width: 680px) {
+	.deck {
+		width: 400px;
+		min-height: 420px;
+	}
+
+	.deck .card {
+		height: 75px;
+		width: 75px;
+	}
+}
+
+@media screen and (max-width: 555px) {
+	#modal-win-title {
+		font-size: 16px;
+	}
+
+	#modal-win-secondary-title {
+		font-size: 14px;
+	}
+	#modal-win-wrapper {
+		width: 60%;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.deck {
+		width: 300px;
+		min-height: 320px;
+	}
+
+	.deck .card {
+		height: 50px;
+		width: 50px;
+	}
+
+	.deck .card.open {
+		font-size: 24px;
+	}
+	#modal-win-wrapper {
+		width: 80%;
+	}
+
+	.score-panel .stars {
+		padding-left: 55px;
+	}
+
+	.score-panel #restart {
+		float: right;
+		cursor: pointer;
+		padding-right: 50px;
+	}
 }

@@ -17,13 +17,15 @@ let cardsArray0,
 	cardFlip180,
 	cardFlip0;
 
+/********************************************************************************************** */
+//global variables assignments
 cardFlip180 = 'rotateY(180deg)';
 cardFlip0 = 'rotateY(0deg)';
 fa = 'fa ';
 card = document.getElementsByClassName('card');
 deck = document.querySelector('.deck');
 cardDeck = document.getElementById('card-deck');
-stars = document.querySelector('stars');
+stars = document.querySelectorAll('.stars');
 timerElem = document.getElementById('timer');
 modalWinContainer = document.getElementById('modal-win-container');
 timerWin = document.getElementById('timerWin');
@@ -32,6 +34,8 @@ modalRestartBtn = document.getElementById('modal-restart-btn');
 count = 0;
 matchedCards = [];
 flippedCards = [];
+
+/********************************************************************************************** */
 
 //Create the cards
 cardsArray0 = [
@@ -70,11 +74,32 @@ cardsArray1 = shuffle(cardsArray1);
 
 /********************************************************************************************** */
 
+function theStars() {
+	starsLi = document.createElement('li');
+
+	for (let i = 0; i < 3; i++) {
+		stars.appendChild(starsLi);
+	}
+}
+
+/********************************************************************************************** */
+
 //Move counter
 function movesCounter() {
 	count++;
 	for (let i = 0; i < movesClass.length; i++) {
 		movesClass[i].innerHTML = count;
+		Array.from(stars).forEach(function(el) {
+			if (count > 10 && count < 15) {
+				el.childNodes[5].style.visibility = 'hidden';
+			}
+			if (count > 16 && count < 20) {
+				el.childNodes[3].style.visibility = 'hidden';
+			}
+			if (count > 21) {
+				el.childNodes[1].style.visibility = 'hidden';
+			}
+		});
 	}
 }
 
@@ -147,9 +172,8 @@ displayCard();
 
 //matched cards function
 function matched() {
-	console.log('you got a match');
+	//console.log('you got a match');
 	matchedCards.push(flippedCards[0], flippedCards[1]);
-	console.log(matchedCards);
 	for (let m = 0; m < cardsArray1.length; m++) {
 		if (card[m].classList.contains('show', 'open')) {
 			card[m].classList.add('match');
@@ -159,7 +183,7 @@ function matched() {
 	if (matchedCards.length === 16) {
 		modalWinContainer.style.display = 'flex';
 		timerWin.innerHTML = timerElem.innerHTML;
-		console.log('You won the game!!');
+		//console.log('You won the game!!');
 		clearInterval(timer);
 	}
 	flippedCards = [];
@@ -169,8 +193,7 @@ function matched() {
 
 //unmatched cards function
 function unmatched() {
-	console.log(flippedCards);
-	console.log('it is not a match');
+	//console.log('it is not a match');
 	setTimeout(function() {
 		for (let j = 0; j < cardsArray1.length; j++) {
 			if (!card[j].classList.contains('match')) {
@@ -183,7 +206,6 @@ function unmatched() {
 }
 
 /********************************************************************************************** */
-
 //restart the game
 function restartGame(restart) {
 	restart = document.getElementById('restart');
@@ -193,7 +215,11 @@ function restartGame(restart) {
 }
 restartGame();
 
+/********************************************************************************************** */
+//restart function to be used for dynamically incorporating into other restart buttons
 function restartModal() {
+	resetStars();
+	matchedCards = [];
 	cardDeck.innerHTML = ' ';
 
 	//reset the moves
@@ -211,6 +237,17 @@ function restartModal() {
 	displayCard();
 }
 
+/********************************************************************************************** */
+
+function resetStars() {
+	Array.from(stars).forEach(function(el) {
+		el.childNodes[1].style.visibility = 'visible';
+		el.childNodes[3].style.visibility = 'visible';
+		el.childNodes[5].style.visibility = 'visible';
+	});
+}
+
+//function for when the restart win modal is loaded
 function restartWin() {
 	modalRestartBtn.addEventListener('click', function() {
 		modalWinContainer.style.display = 'none';
