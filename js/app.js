@@ -85,16 +85,6 @@ cardsArray1 = shuffle(cardsArray1);
 
 /********************************************************************************************** */
 
-function theStars() {
-	starsLi = document.createElement('li');
-
-	for (let i = 0; i < 3; i++) {
-		stars.appendChild(starsLi);
-	}
-}
-
-/********************************************************************************************** */
-
 //Move counter
 function movesCounter() {
 	count++;
