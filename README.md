@@ -1,6 +1,6 @@
 # Memory Magic-Memory Game Project 
 
-A simple memory game adapted from Udacity project
+A simple memory game adapted from the Udacity project
 
 ## Getting Started
 
@@ -11,8 +11,20 @@ Download or clone the repository to your local drive
 
 You will need a code editor and a web browser
 
+Some code editor examples are as follows:  
+
 ```
-Give examples
+VS Code:(https://code.visualstudio.com/)
+Atom:(https://atom.io/)
+Sublime:(https://www.sublimetext.com/)
+```
+
+Some web browser examples are as follows:
+```
+
+Chrome:(https://www.google.com/chrome/)
+Firefox:(https://www.mozilla.org/en-US/firefox/new/)
+Opera:https://www.opera.com/
 ```
 
 ### Installing
@@ -21,22 +33,13 @@ Give examples
 Initialize using a local server
 
 ```
-For example:
-```
-
 If using Visual Studio Code, once you have the package in the code editor, right click on index.html and click on Open With Live Server.
 
+```
 
 ```
 Game should load in the browser, and now, just have fun!
 ```
-
-
-
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
