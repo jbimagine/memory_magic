@@ -177,6 +177,18 @@ h1 {
 	padding-right: 40px;
 }
 
+#close-btn-container {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+#close-btn {
+	font-size: 26px;
+	padding-right: 20px;
+	position: absolute;
+	cursor: pointer;
+}
+
 /*
    * Styles for responsive design
    */

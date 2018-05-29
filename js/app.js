@@ -15,7 +15,8 @@ let cardsArray0,
 	count,
 	modalRestartBtn,
 	cardFlip180,
-	cardFlip0;
+	cardFlip0,
+	closeBtn;
 
 /********************************************************************************************** */
 //global variables assignments
@@ -35,6 +36,16 @@ count = 0;
 matchedCards = [];
 flippedCards = [];
 
+/********************************************************************************************** */
+
+function closeWinModal() {
+	let closeBtn = document.getElementById('close-btn');
+
+	closeBtn.addEventListener('click', function() {
+		modalWinContainer.style.display = 'none';
+	});
+}
+closeWinModal();
 /********************************************************************************************** */
 
 //Create the cards
