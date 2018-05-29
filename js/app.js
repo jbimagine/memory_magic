@@ -219,6 +219,7 @@ restartGame();
 //restart function to be used for dynamically incorporating into other restart buttons
 function restartModal() {
 	resetStars();
+	flippedCards = [];
 	matchedCards = [];
 	cardDeck.innerHTML = ' ';
 
@@ -238,7 +239,7 @@ function restartModal() {
 }
 
 /********************************************************************************************** */
-
+//resets the stars
 function resetStars() {
 	Array.from(stars).forEach(function(el) {
 		el.childNodes[1].style.visibility = 'visible';
