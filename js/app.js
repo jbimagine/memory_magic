@@ -37,17 +37,6 @@ matchedCards = [];
 flippedCards = [];
 
 /********************************************************************************************** */
-
-function closeWinModal() {
-	let closeBtn = document.getElementById('close-btn');
-
-	closeBtn.addEventListener('click', function() {
-		modalWinContainer.style.display = 'none';
-	});
-}
-closeWinModal();
-/********************************************************************************************** */
-
 //Create the cards
 cardsArray0 = [
 	'fa-diamond',
@@ -63,6 +52,17 @@ cardsArray0 = [
 //Dynamically create the duplicated cards
 cardsArray1 = cardsArray0.concat(cardsArray0);
 
+/********************************************************************************************** */
+
+//function to close the win modal if user does not want to restart the game
+function closeWinModal() {
+	let closeBtn = document.getElementById('close-btn');
+
+	closeBtn.addEventListener('click', function() {
+		modalWinContainer.style.display = 'none';
+	});
+}
+closeWinModal();
 /********************************************************************************************** */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
