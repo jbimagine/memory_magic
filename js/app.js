@@ -97,9 +97,6 @@ function movesCounter() {
 			if (count > 16 && count < 20) {
 				el.childNodes[3].style.visibility = 'hidden';
 			}
-			if (count > 21) {
-				el.childNodes[1].style.visibility = 'hidden';
-			}
 		});
 	}
 }
